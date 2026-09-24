@@ -15,7 +15,10 @@ supplied by the user later; this phase is architecture only.
 - Writing the actual apologetic content/arguments.
 - Quizzes or self-check features (explicitly excluded by the user).
 - Any backend, database, or server — this is a pure static site.
-- Visual design polish (colors, typography) beyond a clean, readable baseline.
+- A light theme / theme toggle — the site has one fixed dark (black) look.
+- Extending the web/starfield visual treatment to the argument-tree or
+  objections UI inside a topic page — those stay the plain expandable-list
+  design from the original mockup.
 
 ## Tech stack
 
@@ -27,18 +30,19 @@ build pipeline adds no value at this scale.
 
 ```
 faith-arguments/
-  index.html              # home page: hero + topic cards
+  index.html              # home page: topic web (hub + nodes) / grid toggle
   topic.html               # single template page for ALL topics
   css/
-    style.css              # shared styles, layout, light/dark tokens
+    style.css              # shared styles, fixed dark/black theme
   js/
-    main.js                # topics registry loading, nav rendering, theme toggle
+    main.js                # topics registry loading, shared nav rendering
     topic-page.js            # topic.html logic: reads ?topic=slug, loads JSON, renders
     components/
       argument-tree.js       # renders premise -> conclusion argument map
       objections.js           # renders expandable objection/response accordion
+      topic-web.js             # renders index.html's web-of-topics + grid layout toggle
   data/
-    topics.json              # registry: [{slug, title, teaser, icon}, ...]
+    topics.json              # registry: [{slug, title, teaser}, ...]
     universe.json             # topic content for "Beginning of the Universe"
     morality.json
     jesus.json
@@ -57,14 +61,56 @@ page from that data. Adding a new topic later requires only:
 No HTML or JS changes are needed to add a topic. This directly satisfies the
 requirement that more topics can be added later without restructuring.
 
+## Visual design: fixed dark theme + topic web
+
+The site has one fixed visual theme — no light mode: black page background,
+white/gray text and borders, no other saturated colors. Confirmed via
+interactive mockups during design.
+
+**Home page (`index.html`)** renders topics as a web rather than a card grid:
+
+- A central hub node (decorative, labeled with the site's core question)
+  sits in the middle, connected by thin lines to one node per topic.
+- Topic nodes are circles with the topic title set directly inside the
+  bubble (no icons), positioned around the hub. For N topics, positions are
+  computed (not hand-placed) — evenly spaced around the hub, adding
+  further rings as the topic count grows — so this scales automatically as
+  topics are added to `topics.json`.
+- Each topic bubble has a subtle decorative "starfield" behind the title:
+  a handful of small white dots plus 1-2 faint sparkle accents, at low,
+  varied opacity. Purely decorative (`aria-hidden`), generated the same way
+  for every bubble (small randomized jitter is fine, exact positions don't
+  matter).
+- Hovering a topic bubble scales it up (~1.15x) and brightens its border
+  and connecting line to full white. Implemented with a CSS transition on
+  `transform`/`border-color`, no JS animation library needed.
+- A dashed, unlabeled "+" node hints that more topics can be added, staying
+  purely decorative (not a real link).
+
+**Layout toggle**: a three-dot ("kebab") icon button in the top-right of the
+header opens a small dropdown with two options, "Web view" and "Grid view":
+
+- *Web view* (default) is the hub-and-nodes layout described above.
+- *Grid view* drops the hub/lines and lays the same topic bubbles out in a
+  responsive CSS grid (`repeat(auto-fit, minmax(...))`), for users who find
+  scanning rows/columns easier than the radial layout.
+- The chosen layout is saved to `localStorage` (same mechanism as visited-
+  topic progress, see below) and restored on the next visit; if
+  `localStorage` is unavailable, the page simply always starts in Web view.
+
+Implementation note: because node positions in Web view must be computed
+from the topic count, `topic-web.js` is responsible for both layouts (it
+switches between rendering the radial layout and the CSS grid layout based
+on the saved/selected mode) rather than splitting this across two files.
+
 ## Data model
 
 `data/topics.json`:
 ```json
 [
-  { "slug": "universe", "title": "The Beginning of the Universe", "teaser": "...", "icon": "..." },
-  { "slug": "morality", "title": "Morality", "teaser": "...", "icon": "..." },
-  { "slug": "jesus", "title": "Jesus", "teaser": "...", "icon": "..." }
+  { "slug": "universe", "title": "The Beginning of the Universe", "teaser": "..." },
+  { "slug": "morality", "title": "Morality", "teaser": "..." },
+  { "slug": "jesus", "title": "Jesus", "teaser": "..." }
 ]
 ```
 
@@ -110,23 +156,27 @@ changes.
 - **objections.js**: Takes an `objections` array and renders each as an
   accordion row (objection text, click to reveal response). Same
   data-in/DOM-out shape as argument-tree.js.
-- **main.js**: Loads `topics.json` once, renders the shared nav (used on both
-  `index.html` and `topic.html`) and the home page's topic cards. Also
-  handles a simple light/dark theme toggle.
+- **main.js**: Loads `topics.json` once and renders the shared top nav (used
+  on both `index.html` and `topic.html`), including the visited checkmarks.
+- **topic-web.js**: On `index.html` only. Takes the loaded topics list and
+  renders the Web-view (hub + computed node positions + starfield bubbles +
+  hover effects) or Grid-view layout, plus the kebab menu that switches
+  between them and persists the choice.
 - **topic-page.js**: Reads the `topic` query param, fetches the matching
   `data/<slug>.json`, and calls `argument-tree.js` / `objections.js` to
   render the page body. Handles the "topic not found" error case (unknown
   slug) with a simple message and a link back to the home page.
 
-## Navigation and progress
+## Navigation, progress, and layout preference
 
 A shared nav bar (rendered by `main.js` from `topics.json`) appears on every
 page, listing all topics so the user can jump directly between them.
-"Progress" (which topics have been visited) is tracked in the browser's
-`localStorage` and shown as a checkmark next to visited topics in the nav.
-This is a per-browser convenience only — not synced anywhere, no account
-system, and it degrades gracefully (nav still works fully) if `localStorage`
-is unavailable.
+"Progress" (which topics have been visited) and the home page's chosen
+layout (Web vs Grid) are both tracked in the browser's `localStorage`;
+visited topics show a checkmark in the nav. This is a per-browser
+convenience only — not synced anywhere, no account system — and everything
+degrades gracefully (nav and layout still work, just unpersisted) if
+`localStorage` is unavailable.
 
 ## Error handling
 
@@ -151,18 +201,24 @@ build step required.
 No automated test suite for this static content site. Verification is
 manual, in-browser, after implementation:
 
-1. Home page lists all three topics as cards.
-2. Clicking a topic card navigates to `topic.html?topic=<slug>` and renders
-   correctly.
-3. Nav bar allows jumping directly between all topics from any page.
-4. Argument-tree premises expand/collapse and show nested children correctly.
-5. Objections accordion expands/collapses and shows responses correctly.
-6. Visiting a topic marks it visited (checkmark) in the nav, persisting
+1. Home page renders all three topics as bubbles in the Web layout by
+   default (hub, connecting lines, starfield, dashed "+" node).
+2. Hovering a topic bubble grows it and brightens its connecting line.
+3. Clicking a topic bubble navigates to `topic.html?topic=<slug>` and
+   renders correctly.
+4. The kebab menu switches to Grid view (bubbles in rows/columns, no
+   hub/lines) and back to Web view; the chosen layout persists across a
+   page reload.
+5. Nav bar allows jumping directly between all topics from any page.
+6. Argument-tree premises expand/collapse and show nested children correctly.
+7. Objections accordion expands/collapses and shows responses correctly.
+8. Visiting a topic marks it visited (checkmark) in the nav, persisting
    across a page reload.
-7. Adding a 4th, dummy topic (one JSON file + one `topics.json` entry only)
-   works end-to-end with zero code changes — proves the extensibility goal.
-8. Navigating to an unknown `?topic=` slug shows the not-found fallback
-   instead of a broken page.
+9. Adding a 4th, dummy topic (one JSON file + one `topics.json` entry only)
+   works end-to-end with zero code changes, including its bubble position
+   in Web view being computed automatically — proves the extensibility goal.
+10. Navigating to an unknown `?topic=` slug shows the not-found fallback
+    instead of a broken page.
 
 ## Content status
 
