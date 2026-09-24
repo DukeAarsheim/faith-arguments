@@ -103,7 +103,7 @@ h1 { margin: 0 0 8px; font-size: 22px; font-weight: 600; }
 .kebab-menu .check.visible { visibility: visible; }
 
 .topic-web { position: relative; height: 380px; }
-.topic-web svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+.topic-web svg { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
 .web-line { stroke: var(--border); stroke-width: 1; transition: stroke 0.15s ease, stroke-width 0.15s ease; }
 .web-line.hovered { stroke: var(--border-strong); stroke-width: 1.5; }
 
@@ -124,7 +124,9 @@ h1 { margin: 0 0 8px; font-size: 22px; font-weight: 600; }
 }
 .web-hub span { font-size: 11px; color: var(--text-secondary); padding: 0 6px; }
 
-.topic-node { position: absolute; transform: translate(-50%, -50%); text-align: center; cursor: pointer; display: block; }
+.topic-node { text-align: center; cursor: pointer; display: block; }
+.topic-web .topic-node { position: absolute; transform: translate(-50%, -50%); }
+.topic-grid .topic-node { position: static; }
 .node-circle {
   position: relative;
   overflow: hidden;
