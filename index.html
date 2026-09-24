@@ -14,5 +14,12 @@
   <main>
     <p class="summary">Coming soon.</p>
   </main>
+  <script src="js/main.js"></script>
+  <script>
+    (async function () {
+      const topics = await FaithApp.loadTopics();
+      FaithApp.renderNav(topics, null, document.getElementById('site-nav'));
+    })();
+  </script>
 </body>
 </html>
