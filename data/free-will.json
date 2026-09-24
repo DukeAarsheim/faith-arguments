@@ -1,0 +1,15 @@
+{
+  "slug": "free-will",
+  "title": "Free Will",
+  "summary": "Placeholder framing for the free will argument. Replace with your own writing.",
+  "argument": {
+    "conclusion": "Human beings have genuine free will, which is best explained on theism.",
+    "premises": [
+      { "id": "p1", "text": "We have a strong, immediate awareness of making free choices.", "support": "Placeholder support text for premise 1.", "children": [] },
+      { "id": "p2", "text": "On naturalism, human choices are fully determined by prior physical causes.", "support": "Placeholder support text for premise 2.", "children": [] }
+    ]
+  },
+  "objections": [
+    { "id": "o1", "text": "The feeling of free will could just be an illusion produced by the brain.", "response": "Placeholder response text." }
+  ]
+}
