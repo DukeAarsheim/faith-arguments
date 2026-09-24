@@ -2,9 +2,9 @@ window.FaithApp = window.FaithApp || {};
 
 (function (FaithApp) {
   const RINGS = [
-    { id: 1, title: 'Does God Exist?', radius: 15 },
-    { id: 2, title: 'Why Christianity?', radius: 50 },
-    { id: 3, title: 'Common Objections', radius: 85 }
+    { id: 1, title: 'Does God Exist?', radius: 29 },
+    { id: 2, title: 'Why Christianity?', radius: 58 },
+    { id: 3, title: 'Common Objections', radius: 87 }
   ];
   const BLANK_SLOTS = { 3: 2 };
 
