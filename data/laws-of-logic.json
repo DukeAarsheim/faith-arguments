@@ -1,0 +1,15 @@
+{
+  "slug": "laws-of-logic",
+  "title": "The Laws of Logic",
+  "summary": "Placeholder framing for the argument from the laws of logic. Replace with your own writing.",
+  "argument": {
+    "conclusion": "The laws of logic are best explained by a necessary, rational mind rather than by an impersonal universe.",
+    "premises": [
+      { "id": "p1", "text": "The laws of logic are universal, invariant, and non-physical.", "support": "Placeholder support text for premise 1.", "children": [] },
+      { "id": "p2", "text": "Abstract, universal, non-physical laws require grounding in a mind rather than in matter.", "support": "Placeholder support text for premise 2.", "children": [] }
+    ]
+  },
+  "objections": [
+    { "id": "o1", "text": "Couldn't the laws of logic just be useful conventions humans invented?", "response": "Placeholder response text." }
+  ]
+}

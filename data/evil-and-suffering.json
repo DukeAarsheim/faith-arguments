@@ -1,0 +1,15 @@
+{
+  "slug": "evil-and-suffering",
+  "title": "Evil and Suffering",
+  "summary": "Placeholder framing for the response to the problem of evil. Replace with your own writing.",
+  "argument": {
+    "conclusion": "The existence of evil and suffering is not, in the end, incompatible with the existence of an all-good, all-powerful God.",
+    "premises": [
+      { "id": "p1", "text": "The presence of evil does not logically rule out God's existence, since a good God could have morally sufficient reasons for permitting it.", "support": "Placeholder support text for premise 1.", "children": [] },
+      { "id": "p2", "text": "Human free will, and a world governed by consistent natural laws, requires the possibility of suffering.", "support": "Placeholder support text for premise 2.", "children": [] }
+    ]
+  },
+  "objections": [
+    { "id": "o1", "text": "Couldn't an all-powerful God have created a world with free will but without so much unnecessary suffering?", "response": "Placeholder response text." }
+  ]
+}

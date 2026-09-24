@@ -1,0 +1,15 @@
+{
+  "slug": "new-testament",
+  "title": "The New Testament",
+  "summary": "Placeholder framing for the case for the New Testament's reliability. Replace with your own writing.",
+  "argument": {
+    "conclusion": "The New Testament documents are early, well-attested, and historically reliable.",
+    "premises": [
+      { "id": "p1", "text": "The New Testament is supported by an unmatched number of early manuscripts.", "support": "Placeholder support text for premise 1.", "children": [] },
+      { "id": "p2", "text": "The Gospels were written within living memory of the events they describe.", "support": "Placeholder support text for premise 2.", "children": [] }
+    ]
+  },
+  "objections": [
+    { "id": "o1", "text": "Weren't the Gospels written too late, and by biased authors, to be trusted?", "response": "Placeholder response text." }
+  ]
+}

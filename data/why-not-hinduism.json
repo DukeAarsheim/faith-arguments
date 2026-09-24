@@ -1,0 +1,15 @@
+{
+  "slug": "why-not-hinduism",
+  "title": "Why Not Hinduism?",
+  "summary": "Placeholder framing comparing Christianity's and Hinduism's accounts of God and the world. Replace with your own writing.",
+  "argument": {
+    "conclusion": "Christianity offers a more coherent account of God, the world, and personal identity than Hinduism does.",
+    "premises": [
+      { "id": "p1", "text": "Hinduism's pantheistic and karmic framework struggles to ground objective moral responsibility.", "support": "Placeholder support text for premise 1.", "children": [] },
+      { "id": "p2", "text": "Christianity's claim of a single historical incarnation fits the evidence better than a cycle of reincarnation with no historical anchor.", "support": "Placeholder support text for premise 2.", "children": [] }
+    ]
+  },
+  "objections": [
+    { "id": "o1", "text": "Isn't it arrogant to say one religious tradition is simply correct and others aren't?", "response": "Placeholder response text." }
+  ]
+}

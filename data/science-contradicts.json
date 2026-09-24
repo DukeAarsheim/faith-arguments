@@ -1,0 +1,15 @@
+{
+  "slug": "science-contradicts",
+  "title": "Science Contradicts",
+  "summary": "Placeholder framing for the response to claims that science and Christianity conflict. Replace with your own writing.",
+  "argument": {
+    "conclusion": "Science and Christian faith are not in conflict — properly understood, they are complementary ways of understanding reality.",
+    "premises": [
+      { "id": "p1", "text": "Modern science itself arose within a Christian intellectual context that expected the universe to be orderly and knowable.", "support": "Placeholder support text for premise 1.", "children": [] },
+      { "id": "p2", "text": "Apparent conflicts between science and Christianity are usually conflicts with a particular interpretation, not with the faith itself.", "support": "Placeholder support text for premise 2.", "children": [] }
+    ]
+  },
+  "objections": [
+    { "id": "o1", "text": "Hasn't evolution disproven the biblical account of human origins?", "response": "Placeholder response text." }
+  ]
+}

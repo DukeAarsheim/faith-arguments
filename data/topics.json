@@ -1,6 +1,13 @@
 [
-  { "slug": "universe", "title": "The Beginning of the Universe", "teaser": "Why the universe having a beginning points to a cause." },
-  { "slug": "morality", "title": "Morality", "teaser": "Where objective moral obligations could come from." },
-  { "slug": "jesus", "title": "Jesus", "teaser": "The historical case for the resurrection." },
-  { "slug": "free-will", "title": "Free Will", "teaser": "Why free will fits better with theism than naturalism." }
+  { "slug": "universe", "title": "The Beginning of the Universe", "teaser": "Why the universe having a beginning points to a cause.", "ring": 1 },
+  { "slug": "morality", "title": "Morality", "teaser": "Where objective moral obligations could come from.", "ring": 1 },
+  { "slug": "free-will", "title": "Free Will", "teaser": "Why free will fits better with theism than naturalism.", "ring": 1 },
+  { "slug": "laws-of-logic", "title": "The Laws of Logic", "teaser": "Why universal, non-physical laws of thought point to a mind.", "ring": 1 },
+  { "slug": "jesus", "title": "Jesus", "teaser": "The historical case for the resurrection.", "ring": 2 },
+  { "slug": "old-testament", "title": "The Old Testament", "teaser": "Its reliability and how it points forward to Jesus.", "ring": 2 },
+  { "slug": "new-testament", "title": "The New Testament", "teaser": "Why the New Testament documents can be trusted.", "ring": 2 },
+  { "slug": "why-not-islam", "title": "Why Not Islam?", "teaser": "Comparing the historical case for Christianity and Islam.", "ring": 2 },
+  { "slug": "why-not-hinduism", "title": "Why Not Hinduism?", "teaser": "Comparing Christianity's account of God and the world.", "ring": 2 },
+  { "slug": "evil-and-suffering", "title": "Evil and Suffering", "teaser": "Why evil doesn't rule out an all-good, all-powerful God.", "ring": 3 },
+  { "slug": "science-contradicts", "title": "Science Contradicts", "teaser": "Why science and Christian faith aren't actually in conflict.", "ring": 3 }
 ]

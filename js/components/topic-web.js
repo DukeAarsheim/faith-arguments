@@ -1,6 +1,13 @@
 window.FaithApp = window.FaithApp || {};
 
 (function (FaithApp) {
+  const RINGS = [
+    { id: 1, title: 'Does God Exist?', radius: 15 },
+    { id: 2, title: 'Why Christianity?', radius: 50 },
+    { id: 3, title: 'Common Objections', radius: 85 }
+  ];
+  const BLANK_SLOTS = { 3: 2 };
+
   const STAR_PATTERNS = [
     {
       dots: [
@@ -70,41 +77,36 @@ window.FaithApp = window.FaithApp || {};
     return frag;
   }
 
-  function computeWebPositions(count) {
+  function groupByRing(topics) {
+    return RINGS.map(function (ring, ringIndex) {
+      const ringTopics = topics.filter(function (t) { return t.ring === ring.id; });
+      const blanks = BLANK_SLOTS[ring.id] || 0;
+      return { ring: ring, ringIndex: ringIndex, topics: ringTopics, blanks: blanks };
+    });
+  }
+
+  function computeRingPositions(count, radius) {
     const positions = [];
-    const hub = { x: 50, y: 52 };
-    const baseRadius = 32;
-    const ringGap = 32;
-    let remaining = count;
-    let ring = 0;
-
-    while (remaining > 0) {
-      const capacity = ring === 0 ? 6 : 6 + ring * 2;
-      const inRing = Math.min(remaining, capacity);
-      const radius = baseRadius + ring * ringGap;
-      const angleOffset = ring > 0 ? 180 / inRing : 0;
-      for (let i = 0; i < inRing; i++) {
-        const angle = ((-90 + angleOffset + (360 / inRing) * i) * Math.PI) / 180;
-        positions.push({
-          x: hub.x + radius * Math.cos(angle),
-          y: hub.y + radius * 0.85 * Math.sin(angle)
-        });
-      }
-      remaining -= inRing;
-      ring += 1;
+    if (count === 0) return positions;
+    const angleOffset = 180 / count;
+    for (let i = 0; i < count; i++) {
+      const angle = ((-90 + angleOffset + (360 / count) * i) * Math.PI) / 180;
+      positions.push({
+        x: 50 + radius * Math.cos(angle),
+        y: 50 + radius * Math.sin(angle)
+      });
     }
-
     return positions;
   }
 
-  function buildNode(topic, index) {
+  function buildNode(topic, patternIndex) {
     const node = document.createElement('a');
     node.className = 'topic-node';
     node.href = 'topic.html?topic=' + encodeURIComponent(topic.slug);
 
     const circle = document.createElement('div');
     circle.className = 'node-circle';
-    circle.appendChild(buildStarfield(STAR_PATTERNS[index % STAR_PATTERNS.length]));
+    circle.appendChild(buildStarfield(STAR_PATTERNS[patternIndex % STAR_PATTERNS.length]));
 
     const label = document.createElement('span');
     label.className = 'node-label';
@@ -115,72 +117,226 @@ window.FaithApp = window.FaithApp || {};
     return node;
   }
 
+  function buildBlankNode(patternIndex) {
+    const node = document.createElement('div');
+    node.className = 'topic-node is-blank';
+    node.setAttribute('aria-hidden', 'true');
+
+    const circle = document.createElement('div');
+    circle.className = 'node-circle';
+    circle.appendChild(buildStarfield(STAR_PATTERNS[patternIndex % STAR_PATTERNS.length]));
+
+    node.appendChild(circle);
+    return node;
+  }
+
+  function measureBoundingBox(nodes) {
+    if (nodes.length === 0) return null;
+    const rects = nodes.map(function (n) { return n.getBoundingClientRect(); });
+    const left = Math.min.apply(null, rects.map(function (r) { return r.left; }));
+    const right = Math.max.apply(null, rects.map(function (r) { return r.right; }));
+    const top = Math.min.apply(null, rects.map(function (r) { return r.top; }));
+    const bottom = Math.max.apply(null, rects.map(function (r) { return r.bottom; }));
+    return { width: right - left, height: bottom - top };
+  }
+
+  function measureZoomBounds(stageEl, ring1Nodes, outerRingNodes) {
+    const viewportMin = Math.min(window.innerWidth, window.innerHeight);
+    const originalTransform = stageEl.style.transform;
+    stageEl.style.transform = 'scale(1)';
+
+    const stageSize = stageEl.getBoundingClientRect().width || 1;
+    const outerRingRadius = RINGS[RINGS.length - 1].radius;
+    const outerCircleDiameterPx = 2 * (outerRingRadius / 100) * stageSize;
+
+    const ring1Box = measureBoundingBox(ring1Nodes);
+    const outerBox = measureBoundingBox(outerRingNodes);
+
+    let startZoom = 2;
+    if (ring1Box) {
+      const ring1Max = Math.max(ring1Box.width, ring1Box.height, 1);
+      startZoom = (viewportMin * 0.58) / ring1Max;
+    }
+
+    let endZoom = 1;
+    if (outerBox) {
+      const outerMax = Math.max(outerBox.width, outerBox.height, 1);
+      endZoom = Math.min(1, (viewportMin * 0.92) / outerMax);
+    }
+    endZoom = Math.min(endZoom, (viewportMin * 0.88) / outerCircleDiameterPx);
+
+    if (startZoom < endZoom * 1.4) {
+      startZoom = endZoom * 1.8;
+    }
+
+    stageEl.style.transform = originalTransform;
+    return { startZoom: startZoom, endZoom: endZoom };
+  }
+
+  function setupScrollZoom(stageEl, outerEl, ring1Nodes, outerRingNodes) {
+    let bounds = measureZoomBounds(stageEl, ring1Nodes, outerRingNodes);
+    let ticking = false;
+
+    function update() {
+      const scrollableHeight = outerEl.offsetHeight - window.innerHeight;
+      const rect = outerEl.getBoundingClientRect();
+      const progress = scrollableHeight > 0
+        ? Math.min(1, Math.max(0, -rect.top / scrollableHeight))
+        : 1;
+      const zoom = bounds.startZoom + (bounds.endZoom - bounds.startZoom) * progress;
+      stageEl.style.transform = 'scale(' + zoom.toFixed(3) + ')';
+      ticking = false;
+    }
+
+    function onScroll() {
+      if (!ticking) {
+        window.requestAnimationFrame(update);
+        ticking = true;
+      }
+    }
+
+    function onResize() {
+      bounds = measureZoomBounds(stageEl, ring1Nodes, outerRingNodes);
+      update();
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onResize);
+    update();
+
+    return function cleanup() {
+      window.removeEventListener('scroll', onScroll);
+      window.removeEventListener('resize', onResize);
+    };
+  }
+
   function renderWebLayout(topics, containerEl) {
     containerEl.innerHTML = '';
-    containerEl.className = 'topic-web';
+    containerEl.className = '';
+
+    const outer = document.createElement('div');
+    outer.className = 'web-scroll-outer';
+    outer.style.height = '300vh';
+
+    const sticky = document.createElement('div');
+    sticky.className = 'web-scroll-sticky';
+
+    const stage = document.createElement('div');
+    stage.className = 'web-stage';
 
     const svgNS = 'http://www.w3.org/2000/svg';
     const svg = document.createElementNS(svgNS, 'svg');
     svg.setAttribute('viewBox', '0 0 100 100');
-    svg.setAttribute('preserveAspectRatio', 'none');
     svg.setAttribute('aria-hidden', 'true');
 
-    const hub = document.createElement('div');
-    hub.className = 'web-hub';
-    hub.innerHTML = '<span>Does God exist?</span>';
+    const grouped = groupByRing(topics);
+    let patternIndex = 0;
+    const nodesByRing = [];
 
-    const positions = computeWebPositions(topics.length);
+    grouped.forEach(function (group) {
+      const ringNodes = [];
 
-    topics.forEach(function (topic, index) {
-      const pos = positions[index];
+      const circle = document.createElementNS(svgNS, 'circle');
+      circle.setAttribute('class', 'ring-circle');
+      circle.setAttribute('cx', '50');
+      circle.setAttribute('cy', '50');
+      circle.setAttribute('r', String(group.ring.radius));
+      svg.appendChild(circle);
 
-      const line = document.createElementNS(svgNS, 'line');
-      line.setAttribute('class', 'web-line');
-      line.setAttribute('x1', '50');
-      line.setAttribute('y1', '52');
-      line.setAttribute('x2', String(pos.x));
-      line.setAttribute('y2', String(pos.y));
-      svg.appendChild(line);
+      const totalSlots = group.topics.length + group.blanks;
+      const positions = computeRingPositions(totalSlots, group.ring.radius);
 
-      const node = buildNode(topic, index);
-      node.style.left = pos.x + '%';
-      node.style.top = pos.y + '%';
-      node.addEventListener('mouseenter', function () { line.classList.add('hovered'); });
-      node.addEventListener('mouseleave', function () { line.classList.remove('hovered'); });
+      group.topics.forEach(function (topic, i) {
+        const pos = positions[i];
+        const node = buildNode(topic, patternIndex);
+        patternIndex += 1;
+        node.style.left = pos.x + '%';
+        node.style.top = pos.y + '%';
+        stage.appendChild(node);
+        ringNodes.push(node);
+      });
 
-      containerEl.appendChild(node);
+      for (let b = 0; b < group.blanks; b++) {
+        const pos = positions[group.topics.length + b];
+        const node = buildBlankNode(patternIndex);
+        patternIndex += 1;
+        node.style.left = pos.x + '%';
+        node.style.top = pos.y + '%';
+        stage.appendChild(node);
+        ringNodes.push(node);
+      }
+
+      const label = document.createElement('div');
+      label.className = 'ring-label';
+      label.textContent = group.ring.title;
+      label.style.left = '50%';
+      label.style.top = (50 - group.ring.radius - 5) + '%';
+      stage.appendChild(label);
+
+      nodesByRing.push(ringNodes);
     });
 
-    const ghost = document.createElement('div');
-    ghost.className = 'web-ghost';
-    ghost.style.left = '86%';
-    ghost.style.top = '28%';
-    ghost.textContent = '+';
-    ghost.setAttribute('aria-hidden', 'true');
+    stage.appendChild(svg);
+    sticky.appendChild(stage);
+    outer.appendChild(sticky);
+    containerEl.appendChild(outer);
 
-    containerEl.appendChild(svg);
-    containerEl.appendChild(hub);
-    containerEl.appendChild(ghost);
+    const ring1Nodes = nodesByRing[0] || [];
+    const outerRingNodes = nodesByRing[nodesByRing.length - 1] || [];
+
+    return setupScrollZoom(stage, outer, ring1Nodes, outerRingNodes);
   }
 
   function renderGridLayout(topics, containerEl) {
     containerEl.innerHTML = '';
-    containerEl.className = 'topic-grid';
+    containerEl.className = '';
 
-    topics.forEach(function (topic, index) {
-      const node = buildNode(topic, index);
-      containerEl.appendChild(node);
+    const grouped = groupByRing(topics);
+    let patternIndex = 0;
+
+    grouped.forEach(function (group) {
+      if (group.topics.length === 0 && group.blanks === 0) return;
+
+      const section = document.createElement('div');
+      section.className = 'topic-grid-section';
+
+      const title = document.createElement('p');
+      title.className = 'topic-grid-section-title';
+      title.textContent = group.ring.title;
+      section.appendChild(title);
+
+      const grid = document.createElement('div');
+      grid.className = 'topic-grid';
+
+      group.topics.forEach(function (topic) {
+        grid.appendChild(buildNode(topic, patternIndex));
+        patternIndex += 1;
+      });
+      for (let b = 0; b < group.blanks; b++) {
+        grid.appendChild(buildBlankNode(patternIndex));
+        patternIndex += 1;
+      }
+
+      section.appendChild(grid);
+      containerEl.appendChild(section);
     });
+
+    return null;
   }
 
   FaithApp.renderTopicWeb = function (topics, containerEl) {
     let mode = FaithApp.getLayoutPreference();
+    let cleanupScroll = null;
 
     function draw() {
+      if (cleanupScroll) {
+        cleanupScroll();
+        cleanupScroll = null;
+      }
       if (mode === 'grid') {
         renderGridLayout(topics, containerEl);
       } else {
-        renderWebLayout(topics, containerEl);
+        cleanupScroll = renderWebLayout(topics, containerEl);
       }
     }
     draw();

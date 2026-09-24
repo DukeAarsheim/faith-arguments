@@ -1,0 +1,15 @@
+{
+  "slug": "why-not-islam",
+  "title": "Why Not Islam?",
+  "summary": "Placeholder framing comparing the historical case for Christianity and Islam. Replace with your own writing.",
+  "argument": {
+    "conclusion": "The historical and theological case for Christianity is stronger than the case for Islam.",
+    "premises": [
+      { "id": "p1", "text": "The Quran's account of Jesus conflicts with the earlier, better-attested New Testament record.", "support": "Placeholder support text for premise 1.", "children": [] },
+      { "id": "p2", "text": "Christianity's central claims rest on public, testable historical events; Islam's central claim rests on a private revelation.", "support": "Placeholder support text for premise 2.", "children": [] }
+    ]
+  },
+  "objections": [
+    { "id": "o1", "text": "Isn't the New Testament itself unreliable, since it was written after the events it describes?", "response": "Placeholder response text." }
+  ]
+}

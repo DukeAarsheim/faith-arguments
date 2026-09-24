@@ -1,0 +1,15 @@
+{
+  "slug": "old-testament",
+  "title": "The Old Testament",
+  "summary": "Placeholder framing for the case for the Old Testament's reliability. Replace with your own writing.",
+  "argument": {
+    "conclusion": "The Old Testament is a reliable historical and theological foundation for the Christian faith.",
+    "premises": [
+      { "id": "p1", "text": "The Old Testament text has been transmitted with remarkable accuracy.", "support": "Placeholder support text for premise 1.", "children": [] },
+      { "id": "p2", "text": "Old Testament prophecy points forward to and is fulfilled in Jesus.", "support": "Placeholder support text for premise 2.", "children": [] }
+    ]
+  },
+  "objections": [
+    { "id": "o1", "text": "Doesn't the Old Testament contain contradictions and morally troubling passages?", "response": "Placeholder response text." }
+  ]
+}
