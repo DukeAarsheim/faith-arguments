@@ -12,14 +12,11 @@
     <nav id="site-nav" class="site-nav"></nav>
   </header>
   <main>
-    <p class="summary">Coming soon.</p>
+    <div id="topic-root"></div>
   </main>
   <script src="js/main.js"></script>
-  <script>
-    (async function () {
-      const topics = await FaithApp.loadTopics();
-      FaithApp.renderNav(topics, null, document.getElementById('site-nav'));
-    })();
-  </script>
+  <script src="js/components/argument-tree.js"></script>
+  <script src="js/components/objections.js"></script>
+  <script src="js/topic-page.js"></script>
 </body>
 </html>
