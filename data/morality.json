@@ -1,0 +1,22 @@
+{
+  "slug": "morality",
+  "title": "Morality",
+  "summary": "Placeholder framing for the moral argument. Replace with your own writing.",
+  "argument": {
+    "conclusion": "Objective moral values and duties exist and are best explained by God.",
+    "premises": [
+      {
+        "id": "p1",
+        "text": "If God does not exist, objective moral values and duties do not exist.",
+        "support": "Placeholder support text for premise 1.",
+        "children": [
+          { "id": "p1a", "text": "Objective morality requires a transcendent grounding.", "support": "Placeholder sub-point support text.", "children": [] }
+        ]
+      },
+      { "id": "p2", "text": "Objective moral values and duties do exist.", "support": "Placeholder support text for premise 2.", "children": [] }
+    ]
+  },
+  "objections": [
+    { "id": "o1", "text": "Morality could be a product of evolution alone.", "response": "Placeholder response text." }
+  ]
+}

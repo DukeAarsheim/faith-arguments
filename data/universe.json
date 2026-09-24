@@ -1,0 +1,15 @@
+{
+  "slug": "universe",
+  "title": "The Beginning of the Universe",
+  "summary": "Placeholder framing for the cosmological argument. Replace with your own writing.",
+  "argument": {
+    "conclusion": "The universe has a cause.",
+    "premises": [
+      { "id": "p1", "text": "Whatever begins to exist has a cause.", "support": "Placeholder support text for premise 1.", "children": [] },
+      { "id": "p2", "text": "The universe began to exist.", "support": "Placeholder support text for premise 2.", "children": [] }
+    ]
+  },
+  "objections": [
+    { "id": "o1", "text": "Quantum events are uncaused.", "response": "Placeholder response text." }
+  ]
+}

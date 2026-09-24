@@ -1,0 +1,15 @@
+{
+  "slug": "jesus",
+  "title": "Jesus",
+  "summary": "Placeholder framing for the historical case for the resurrection. Replace with your own writing.",
+  "argument": {
+    "conclusion": "The resurrection of Jesus is the best explanation of the historical evidence.",
+    "premises": [
+      { "id": "p1", "text": "Jesus's tomb was found empty.", "support": "Placeholder support text for premise 1.", "children": [] },
+      { "id": "p2", "text": "Multiple witnesses reported post-death appearances.", "support": "Placeholder support text for premise 2.", "children": [] }
+    ]
+  },
+  "objections": [
+    { "id": "o1", "text": "The accounts were written decades later.", "response": "Placeholder response text." }
+  ]
+}
