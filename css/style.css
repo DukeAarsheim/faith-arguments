@@ -194,9 +194,9 @@ h1 { margin: 0 0 8px; font-size: 22px; font-weight: 600; }
 }
 .premise-head { font-weight: 500; }
 .chevron { flex-shrink: 0; transition: transform 0.15s ease; font-size: 12px; color: var(--text-secondary); }
-.premise[data-open="true"] .chevron, .objection[data-open="true"] .chevron { transform: rotate(180deg); }
+.premise[data-open="true"] > .premise-head .chevron, .objection[data-open="true"] .chevron { transform: rotate(180deg); }
 .premise-body, .objection-body { display: none; padding: 0 16px 14px; font-size: 14px; color: var(--text-secondary); line-height: 1.7; }
-.premise[data-open="true"] .premise-body, .objection[data-open="true"] .objection-body { display: block; }
+.premise[data-open="true"] > .premise-body, .objection[data-open="true"] .objection-body { display: block; }
 .premise-children { margin-top: 10px; padding-left: 16px; border-left: 0.5px solid var(--border); }
 
 .not-found { text-align: center; padding: 60px 0; color: var(--text-secondary); }
