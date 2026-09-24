@@ -1,15 +1,51 @@
 {
   "slug": "universe",
   "title": "The Beginning of the Universe",
-  "summary": "Placeholder framing for the cosmological argument. Replace with your own writing.",
+  "summary": "An argument from the existence of the universe itself: working through causation, the Borde-Guth-Vilenkin theorem, and the Principle of Sufficient Reason, the case narrows the ground of reality down to something necessary, non-physical, and outside space and time — then asks whether that ground is conscious or unconscious, and argues a mind is the only kind of thing that can explain why this particular, rationally intelligible universe exists rather than any other or none at all. This argument stands on its own, independent of the companion \"Free Will\" case, though both arrive at a similar kind of explanatory tool — a mind capable of selecting one outcome from among genuinely live alternatives, for a reason, without being forced — from two different directions.",
   "argument": {
-    "conclusion": "The universe has a cause.",
+    "conclusion": "The necessary, non-physical ground of the universe's existence is best explained as a mind, not an unconscious mechanism.",
     "premises": [
-      { "id": "p1", "text": "Whatever begins to exist has a cause.", "support": "Placeholder support text for premise 1.", "children": [] },
-      { "id": "p2", "text": "The universe began to exist.", "support": "Placeholder support text for premise 2.", "children": [] }
+      {
+        "id": "p1",
+        "text": "If spacetime's existence needs an explanation, there are only three places that explanation could come from — and only one of them actually explains rather than merely asserts.",
+        "support": "The universe could be past-eternal, with no actual beginning needing a cause; its existence could be an unexplained brute fact; or the explanation could come from outside the physical domain altogether — a necessary foundation the whole causal chain rests on, rather than one more contingent event requiring a further cause. This last option is the only one that actually explains rather than merely asserts, and it is the classical theistic answer: something immaterial grounds the existence of the physical universe.",
+        "children": []
+      },
+      {
+        "id": "p2",
+        "text": "That ground must be necessary, not merely timeless — timelessness alone doesn't stop the regress, only necessity does.",
+        "support": "It's tempting to think being outside time is, by itself, enough to explain why the ground needs no further cause — but behind the narrower principle that \"whatever begins to exist has a cause\" sits a broader one, the Principle of Sufficient Reason: everything that exists has an explanation for its existence, either in the necessity of its own nature or in some external cause. A timeless thing could still be contingent — the kind of thing that could have failed to exist — and if so, being outside time does nothing to answer why it exists rather than not. Only necessity closes this gap: being the kind of thing whose non-existence is not merely undetected but impossible. This also rules out locating a timeless escape hatch somewhere inside the universe itself, including a prior multiverse-generating mechanism, since such a mechanism is either itself contingent and needs its own explanation, or is itself proposed as necessary and brute — in which case it is doing exactly the job \"God\" was doing, without any of the independent support God has from elsewhere in the case.",
+        "children": []
+      },
+      {
+        "id": "p3",
+        "text": "A mindless, mechanical necessary ground has no way to explain why this particular, rationally intelligible universe exists — while a mind, which by nature selects one outcome among live alternatives, does.",
+        "support": "A mindless, mechanical ground has no obvious way to produce one particular, contingent universe — these laws, these constants, this history — rather than being maximally uniform, producing everything indiscriminately, or producing nothing at all. A mind has a built-in answer, because that is precisely what a will does: it settles on one outcome among live alternatives. A mindless ground likewise has no particular reason to produce a universe that is not merely orderly but rationally intelligible to reasoning creatures — the fact that mathematics describes the physical world as precisely as it does is not something an unconscious mechanism has any special reason to produce, while a mind that intends rational creatures to exist and understand their world has an obvious one. This is also where the case rejoins the moral argument and a transcendental argument from the possibility of logic and reason itself — both independently conclude that objective moral duties and the laws of thought require a mind as their foundation. A single necessarily-existing mind accounts for physical contingency, rational intelligibility, and objective morality together, in one explanatory move; an unconscious brute fact would need a separate, unconnected account of each.",
+        "children": []
+      },
+      {
+        "id": "p4",
+        "text": "Under the Principle of Sufficient Reason, a mindless ground can only supply its specific output through necessitarianism — and that route fails, because coherent alternative laws are conceivable.",
+        "support": "For a necessary being, PSR is satisfied for existence almost automatically — a mindless ground clears that bar as easily as a conscious one does. The real difficulty is explaining why the ground produced this specific universe rather than some other one, or all of them, or none. The only way for a mindless ground to fully satisfy PSR here is necessitarianism: everything about the ground's nature, including exactly what it produces, follows with strict logical necessity, so this universe is the only thing that could possibly have resulted. But that claim is testable, and it fails — if a universe with different laws or constants can be described without contradiction, that alternative is a coherent possibility, and coherent alternatives mean this universe's laws were not the only ones that could have obtained. A mind is the only remaining candidate that can select one outcome from a field of genuinely live, non-necessitated alternatives while still supplying a reason for the selection — which is precisely what a will does that a mechanism cannot.",
+        "children": []
+      }
     ]
   },
   "objections": [
-    { "id": "o1", "text": "Quantum events are uncaused.", "response": "Placeholder response text." }
+    {
+      "id": "o1",
+      "text": "Maybe the universe is past-eternal, with no actual beginning that needs a cause.",
+      "response": "This doesn't match the evidence: the universe has been expanding throughout its observed history, and the Borde-Guth-Vilenkin theorem shows that any universe which has been expanding, on average, throughout its past must have had an actual beginning a finite time ago, not an infinite history behind it."
+    },
+    {
+      "id": "o2",
+      "text": "Maybe spacetime's existence is just an unexplained brute fact — it exists, full stop, with no further explanation available or required.",
+      "response": "This is logically possible, but it's a far weaker position than it appears. \"Whatever begins to exist has a cause\" is among the most secure principles anyone reasons with — no one accepts that an object in front of them simply popped into being from nothing, uncaused. Declaring the entire physical universe the sole exception to this principle, with no comparable case anywhere in experience to support the exception, is a very costly move, chosen only because the alternative is unwelcome."
+    },
+    {
+      "id": "o3",
+      "text": "Even granting a mindless ground can't fully satisfy the Principle of Sufficient Reason, isn't it still simpler to accept a brute, unconscious ground produced this universe for no further reason, rather than adding the further posit of consciousness?",
+      "response": "Consciousness isn't an arbitrary posit added only to patch this one gap — it's the same single posit already doing independent explanatory work elsewhere, grounding objective moral duty and the reliability of reason itself. A posit that pays for three separate explanatory debts at once is not the kind of posit a razor penalizes; it's the kind a razor favors over three unconnected brute facts."
+    }
   ]
 }

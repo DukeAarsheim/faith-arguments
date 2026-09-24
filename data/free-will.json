@@ -1,15 +1,60 @@
 {
   "slug": "free-will",
   "title": "Free Will",
-  "summary": "Placeholder framing for the free will argument. Replace with your own writing.",
+  "summary": "A case for libertarian free will — the only kind of freedom that can actually ground moral responsibility — arguing that a non-physical will is a defensible source for genuinely uncaused choices, and that this account survives the strongest objection modern physics has to offer. This argument stands on its own, independent of the companion \"Beginning of the Universe\" case, though both arrive at a similar kind of explanatory tool — a mind capable of selecting one outcome from among genuinely live alternatives, for a reason, without being forced — from two different directions.",
   "argument": {
-    "conclusion": "Human beings have genuine free will, which is best explained on theism.",
+    "conclusion": "Libertarian free will — grounded in a non-physical will — is the only account of freedom that can bear the weight of moral responsibility, and it survives the strongest objection physics has to offer.",
     "premises": [
-      { "id": "p1", "text": "We have a strong, immediate awareness of making free choices.", "support": "Placeholder support text for premise 1.", "children": [] },
-      { "id": "p2", "text": "On naturalism, human choices are fully determined by prior physical causes.", "support": "Placeholder support text for premise 2.", "children": [] }
+      {
+        "id": "p1",
+        "text": "Free choices must be able to have gone otherwise — compatibilist freedom is too weak to ground moral responsibility.",
+        "support": "The weakest, cheapest definition of free will is compatibilist: a person is free whenever they can act on whatever they happen to want, with nothing external stopping them. This is easy to satisfy — a person counts as free in this sense even if every one of their wants was itself produced, all the way down, by prior causes entirely outside their control: genetics, upbringing, brain chemistry, or the initial conditions of the universe. But a choice that was guaranteed before you were born, by facts entirely outside your control, is not the kind of choice that can bear the full weight of moral responsibility. A meaningful account of moral responsibility needs something stronger: that at the moment of choice, a person could genuinely have chosen otherwise, holding the past and the laws of nature fixed. This is libertarian free will, and it is the only version of freedom that actually does the work a robust notion of moral responsibility requires.",
+        "children": []
+      },
+      {
+        "id": "p2",
+        "text": "An uncaused choice must originate from a source outside the deterministic chain of prior causes — and of the serious candidates for that source, substance dualism fits best.",
+        "support": "Committing to libertarian freedom raises a hard question: if a choice is not simply the product of prior causes, what is it the product of? Philosophy offers a short list of serious candidates for where a genuinely uncaused choice could come from.",
+        "children": [
+          {
+            "id": "p2a",
+            "text": "Agent-causation — the person themselves, as a substance, is the originating cause of the choice.",
+            "support": "This fits naturally with a view of persons as made in the image of a God who is Himself an uncaused first cause, but it draws the objection that \"the agent just causes it\" describes the mystery rather than resolving it, and invites the worry that an undetermined choice looks less like control and more like luck.",
+            "children": []
+          },
+          {
+            "id": "p2b",
+            "text": "Event-causal libertarianism — a choice is still caused by a person's reasons and desires, but only probabilistically.",
+            "support": "This avoids positing any special power, but faces the luck objection even more sharply: a probabilistic outcome looks like a coin flip happening to land inside someone's head, not an exercise of control.",
+            "children": []
+          },
+          {
+            "id": "p2c",
+            "text": "Quantum indeterminacy — randomness at the quantum level in the brain leaves physical \"room\" for an undetermined will.",
+            "support": "Randomness is not the same thing as agency — at best this clears space for something else to do the actual work of willing; it cannot do that work by itself.",
+            "children": []
+          },
+          {
+            "id": "p2d",
+            "text": "Substance dualism — the mind or soul is a distinct, non-physical substance, not bound by the chain of prior physical causes the way neurons are.",
+            "support": "A non-physical will can be a genuine, uncaused originator of physical action rather than one more link in a physical chain. This fits a Christian account of the person most naturally, since a Christian view of the soul's survival of death already requires something like it — but it inherits what may be the hardest unresolved problem in philosophy of mind: does a non-physical will interacting with a physical brain violate anything we actually know about how the physical world works?",
+            "children": []
+          }
+        ]
+      },
+      {
+        "id": "p3",
+        "text": "A non-physical will grounding free choice survives the strongest objection physics has to offer: the causal closure of the physical.",
+        "support": "Modern physics assumes every physical event with a cause has a sufficient physical cause (the causal closure of the physical, or CCP) — and its track record is excellent: magnetism, the old \"vital force,\" even gravity itself all turned out to have complete physical explanations (Einstein showed gravity is the curvature of spacetime, confirmed directly when gravitational waves were detected in 2015). So the safer bet might seem to be that physics will eventually close the mind-brain gap too, the way it closed the gravity gap. But causal closure only ever explains events that happen within an already-existing physical domain — it has nothing to say about why there is a physical domain at all, a spacetime governed by these particular laws, rather than no domain, a different one, or nothing. That question sits entirely outside anything causal closure was ever built to answer.",
+        "children": []
+      }
     ]
   },
   "objections": [
-    { "id": "o1", "text": "The feeling of free will could just be an illusion produced by the brain.", "response": "Placeholder response text." }
+    {
+      "id": "o1",
+      "text": "An undetermined choice looks less like control and more like luck — if nothing prior fixes which way you choose, isn't the outcome just random?",
+      "response": "This is the sharpest version of the worry, and it's part of why substance dualism is the more promising candidate among the options: a non-physical will is not proposed as a random physical event but as a distinct kind of originating cause, not bound by the physical chain of prior causes the way a probabilistic brain event would be. The remaining question is whether such a non-physical cause can interact with a physical brain without violating what we know about physics — which is exactly what the causal-closure argument goes on to test."
+    }
   ]
 }
