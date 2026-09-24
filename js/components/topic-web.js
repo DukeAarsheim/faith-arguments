@@ -210,6 +210,17 @@ window.FaithApp = window.FaithApp || {};
     };
   }
 
+  function measureBubbleDiameterPx(stageEl) {
+    const probe = document.createElement('div');
+    probe.className = 'node-circle';
+    probe.style.position = 'absolute';
+    probe.style.visibility = 'hidden';
+    stageEl.appendChild(probe);
+    const width = probe.getBoundingClientRect().width;
+    stageEl.removeChild(probe);
+    return width || 92;
+  }
+
   function renderWebLayout(topics, containerEl) {
     containerEl.innerHTML = '';
     containerEl.className = '';
@@ -223,6 +234,15 @@ window.FaithApp = window.FaithApp || {};
 
     const stage = document.createElement('div');
     stage.className = 'web-stage';
+
+    // Attach early so the stage has real layout dimensions to measure against.
+    sticky.appendChild(stage);
+    outer.appendChild(sticky);
+    containerEl.appendChild(outer);
+
+    const stageSize = stage.getBoundingClientRect().width || 1;
+    const bubbleDiameterPx = measureBubbleDiameterPx(stage);
+    const insetUnits = ((bubbleDiameterPx / 2 + 8) / stageSize) * 100;
 
     const svgNS = 'http://www.w3.org/2000/svg';
     const svg = document.createElementNS(svgNS, 'svg');
@@ -243,8 +263,9 @@ window.FaithApp = window.FaithApp || {};
       circle.setAttribute('r', String(group.ring.radius));
       svg.appendChild(circle);
 
+      const placementRadius = Math.max(group.ring.radius - insetUnits, insetUnits);
       const totalSlots = group.topics.length + group.blanks;
-      const positions = computeRingPositions(totalSlots, group.ring.radius);
+      const positions = computeRingPositions(totalSlots, placementRadius);
 
       group.topics.forEach(function (topic, i) {
         const pos = positions[i];
@@ -277,9 +298,6 @@ window.FaithApp = window.FaithApp || {};
     });
 
     stage.appendChild(svg);
-    sticky.appendChild(stage);
-    outer.appendChild(sticky);
-    containerEl.appendChild(outer);
 
     const ring1Nodes = nodesByRing[0] || [];
     const outerRingNodes = nodesByRing[nodesByRing.length - 1] || [];
