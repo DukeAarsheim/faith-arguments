@@ -17,7 +17,8 @@ window.FaithApp = window.FaithApp || {};
   FaithApp.getVisitedTopics = function () {
     try {
       const raw = localStorage.getItem(FaithApp.STORAGE_KEYS.VISITED);
-      return raw ? JSON.parse(raw) : [];
+      const parsed = raw ? JSON.parse(raw) : [];
+      return Array.isArray(parsed) ? parsed : [];
     } catch (err) {
       return [];
     }

@@ -56,7 +56,7 @@ a `?topic=<slug>` query parameter, fetches `data/<slug>.json`, and renders the
 page from that data. Adding a new topic later requires only:
 
 1. A new `data/<newtopic>.json` file with the topic's content.
-2. One new entry in `data/topics.json` (slug, title, teaser, icon).
+2. One new entry in `data/topics.json` (slug, title, teaser).
 
 No HTML or JS changes are needed to add a topic. This directly satisfies the
 requirement that more topics can be added later without restructuring.
@@ -146,6 +146,10 @@ on the saved/selected mode) rather than splitting this across two files.
 `children` on a premise is an optional array of the same shape (nested
 sub-points), allowing arbitrarily deep argument trees without any code
 changes.
+
+`teaser` is currently unused by the UI — it is not rendered anywhere (the
+topic web/grid bubbles show only the title). It is reserved for potential
+future use, e.g. a tooltip or a card subtitle in a future layout.
 
 ## Components
 

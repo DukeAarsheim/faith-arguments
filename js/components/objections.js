@@ -12,7 +12,15 @@ window.FaithApp = window.FaithApp || {};
       const head = document.createElement('button');
       head.className = 'objection-head';
       head.type = 'button';
-      head.innerHTML = '<span>' + objection.text + '</span><span class="chevron">▾</span>';
+      head.setAttribute('aria-expanded', 'false');
+
+      const textSpan = document.createElement('span');
+      textSpan.textContent = objection.text;
+      const chevron = document.createElement('span');
+      chevron.className = 'chevron';
+      chevron.textContent = '▾';
+      head.appendChild(textSpan);
+      head.appendChild(chevron);
 
       const body = document.createElement('div');
       body.className = 'objection-body';
@@ -21,6 +29,7 @@ window.FaithApp = window.FaithApp || {};
       head.addEventListener('click', function () {
         const isOpen = row.getAttribute('data-open') === 'true';
         row.setAttribute('data-open', isOpen ? 'false' : 'true');
+        head.setAttribute('aria-expanded', isOpen ? 'false' : 'true');
       });
 
       row.appendChild(head);

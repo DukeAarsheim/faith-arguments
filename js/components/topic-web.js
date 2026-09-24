@@ -53,6 +53,7 @@ window.FaithApp = window.FaithApp || {};
       span.style.width = dot.size + 'px';
       span.style.height = dot.size + 'px';
       span.style.opacity = dot.opacity;
+      span.setAttribute('aria-hidden', 'true');
       frag.appendChild(span);
     });
     pattern.sparkles.forEach(function (sparkle) {
@@ -63,6 +64,7 @@ window.FaithApp = window.FaithApp || {};
       span.style.width = sparkle.size + 'px';
       span.style.height = sparkle.size + 'px';
       span.style.opacity = sparkle.opacity;
+      span.setAttribute('aria-hidden', 'true');
       frag.appendChild(span);
     });
     return frag;
@@ -72,7 +74,7 @@ window.FaithApp = window.FaithApp || {};
     const positions = [];
     const hub = { x: 50, y: 52 };
     const baseRadius = 32;
-    const ringGap = 15;
+    const ringGap = 32;
     let remaining = count;
     let ring = 0;
 
@@ -80,8 +82,9 @@ window.FaithApp = window.FaithApp || {};
       const capacity = ring === 0 ? 6 : 6 + ring * 2;
       const inRing = Math.min(remaining, capacity);
       const radius = baseRadius + ring * ringGap;
+      const angleOffset = ring > 0 ? 180 / inRing : 0;
       for (let i = 0; i < inRing; i++) {
-        const angle = ((-90 + (360 / inRing) * i) * Math.PI) / 180;
+        const angle = ((-90 + angleOffset + (360 / inRing) * i) * Math.PI) / 180;
         positions.push({
           x: hub.x + radius * Math.cos(angle),
           y: hub.y + radius * 0.85 * Math.sin(angle)
@@ -120,6 +123,7 @@ window.FaithApp = window.FaithApp || {};
     const svg = document.createElementNS(svgNS, 'svg');
     svg.setAttribute('viewBox', '0 0 100 100');
     svg.setAttribute('preserveAspectRatio', 'none');
+    svg.setAttribute('aria-hidden', 'true');
 
     const hub = document.createElement('div');
     hub.className = 'web-hub';
@@ -191,23 +195,36 @@ window.FaithApp = window.FaithApp || {};
     }
     syncChecks();
 
+    const kebabBtn = document.getElementById('kebab-btn');
+    kebabBtn.setAttribute('aria-haspopup', 'true');
+    kebabBtn.setAttribute('aria-expanded', 'false');
+
+    function setMenuOpen(open) {
+      menu.classList.toggle('open', open);
+      kebabBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    }
+
     [webOption, gridOption].forEach(function (option) {
       option.addEventListener('click', function () {
         mode = option.getAttribute('data-mode');
         FaithApp.setLayoutPreference(mode);
         syncChecks();
         draw();
-        menu.classList.remove('open');
+        setMenuOpen(false);
       });
     });
 
-    const kebabBtn = document.getElementById('kebab-btn');
     kebabBtn.addEventListener('click', function (e) {
       e.stopPropagation();
-      menu.classList.toggle('open');
+      setMenuOpen(!menu.classList.contains('open'));
     });
     document.addEventListener('click', function () {
-      menu.classList.remove('open');
+      setMenuOpen(false);
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && menu.classList.contains('open')) {
+        setMenuOpen(false);
+      }
     });
   };
 })(window.FaithApp);

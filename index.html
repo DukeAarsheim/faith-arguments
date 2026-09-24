@@ -10,7 +10,7 @@
   <header class="site-header">
     <span class="site-title">Faith Arguments</span>
     <nav id="site-nav" class="site-nav"></nav>
-    <button id="kebab-btn" class="kebab-btn" aria-label="Layout options" type="button">
+    <button id="kebab-btn" class="kebab-btn" aria-label="Layout options" aria-haspopup="true" aria-expanded="false" type="button">
       <span class="kebab-dot"></span>
       <span class="kebab-dot"></span>
       <span class="kebab-dot"></span>
@@ -31,9 +31,18 @@
   <script src="js/components/topic-web.js"></script>
   <script>
     (async function () {
-      const topics = await FaithApp.loadTopics();
-      FaithApp.renderNav(topics, null, document.getElementById('site-nav'));
-      FaithApp.renderTopicWeb(topics, document.getElementById('topic-web-root'));
+      try {
+        const topics = await FaithApp.loadTopics();
+        FaithApp.renderNav(topics, null, document.getElementById('site-nav'));
+        FaithApp.renderTopicWeb(topics, document.getElementById('topic-web-root'));
+      } catch (err) {
+        const root = document.getElementById('topic-web-root');
+        root.innerHTML = '';
+        const message = document.createElement('p');
+        message.className = 'summary';
+        message.textContent = "Couldn't load topics. If you opened this file directly, serve the folder over http instead.";
+        root.appendChild(message);
+      }
     })();
   </script>
 </body>

@@ -9,7 +9,15 @@ window.FaithApp = window.FaithApp || {};
     const head = document.createElement('button');
     head.className = 'premise-head';
     head.type = 'button';
-    head.innerHTML = '<span>' + premise.text + '</span><span class="chevron">▾</span>';
+    head.setAttribute('aria-expanded', 'false');
+
+    const textSpan = document.createElement('span');
+    textSpan.textContent = premise.text;
+    const chevron = document.createElement('span');
+    chevron.className = 'chevron';
+    chevron.textContent = '▾';
+    head.appendChild(textSpan);
+    head.appendChild(chevron);
 
     const body = document.createElement('div');
     body.className = 'premise-body';
@@ -27,6 +35,7 @@ window.FaithApp = window.FaithApp || {};
     head.addEventListener('click', function () {
       const isOpen = row.getAttribute('data-open') === 'true';
       row.setAttribute('data-open', isOpen ? 'false' : 'true');
+      head.setAttribute('aria-expanded', isOpen ? 'false' : 'true');
     });
 
     row.appendChild(head);
@@ -39,8 +48,14 @@ window.FaithApp = window.FaithApp || {};
 
     const conclusion = document.createElement('div');
     conclusion.className = 'argument-conclusion';
-    conclusion.innerHTML =
-      '<p class="label">Conclusion</p><p class="value">' + argument.conclusion + '</p>';
+    const label = document.createElement('p');
+    label.className = 'label';
+    label.textContent = 'Conclusion';
+    const value = document.createElement('p');
+    value.className = 'value';
+    value.textContent = argument.conclusion;
+    conclusion.appendChild(label);
+    conclusion.appendChild(value);
     containerEl.appendChild(conclusion);
 
     argument.premises.forEach(function (premise) {
