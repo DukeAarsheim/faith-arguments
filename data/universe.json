@@ -35,17 +35,20 @@
     {
       "id": "o1",
       "text": "Maybe the universe is past-eternal, with no actual beginning that needs a cause.",
-      "response": "This doesn't match the evidence: the universe has been expanding throughout its observed history, and the Borde-Guth-Vilenkin theorem shows that any universe which has been expanding, on average, throughout its past must have had an actual beginning a finite time ago, not an infinite history behind it."
+      "response": "This doesn't match the evidence: the universe has been expanding throughout its observed history, and the Borde-Guth-Vilenkin theorem shows that any universe which has been expanding, on average, throughout its past must have had an actual beginning a finite time ago, not an infinite history behind it.",
+      "relatesTo": "p1"
     },
     {
       "id": "o2",
       "text": "Maybe spacetime's existence is just an unexplained brute fact — it exists, full stop, with no further explanation available or required.",
-      "response": "This is logically possible, but it's a far weaker position than it appears. \"Whatever begins to exist has a cause\" is among the most secure principles anyone reasons with — no one accepts that an object in front of them simply popped into being from nothing, uncaused. Declaring the entire physical universe the sole exception to this principle, with no comparable case anywhere in experience to support the exception, is a very costly move, chosen only because the alternative is unwelcome."
+      "response": "This is logically possible, but it's a far weaker position than it appears. \"Whatever begins to exist has a cause\" is among the most secure principles anyone reasons with — no one accepts that an object in front of them simply popped into being from nothing, uncaused. Declaring the entire physical universe the sole exception to this principle, with no comparable case anywhere in experience to support the exception, is a very costly move, chosen only because the alternative is unwelcome.",
+      "relatesTo": "p1"
     },
     {
       "id": "o3",
       "text": "Even granting a mindless ground can't fully satisfy the Principle of Sufficient Reason, isn't it still simpler to accept a brute, unconscious ground produced this universe for no further reason, rather than adding the further posit of consciousness?",
-      "response": "Consciousness isn't an arbitrary posit added only to patch this one gap — it's the same single posit already doing independent explanatory work elsewhere, grounding objective moral duty and the reliability of reason itself. A posit that pays for three separate explanatory debts at once is not the kind of posit a razor penalizes; it's the kind a razor favors over three unconnected brute facts."
+      "response": "Consciousness isn't an arbitrary posit added only to patch this one gap — it's the same single posit already doing independent explanatory work elsewhere, grounding objective moral duty and the reliability of reason itself. A posit that pays for three separate explanatory debts at once is not the kind of posit a razor penalizes; it's the kind a razor favors over three unconnected brute facts.",
+      "relatesTo": "p4"
     }
   ]
 }

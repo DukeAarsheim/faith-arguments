@@ -10,6 +10,6 @@
     ]
   },
   "objections": [
-    { "id": "o1", "text": "Weren't the Gospels written too late, and by biased authors, to be trusted?", "response": "Placeholder response text." }
+    { "id": "o1", "text": "Weren't the Gospels written too late, and by biased authors, to be trusted?", "response": "Placeholder response text.", "relatesTo": "p2" }
   ]
 }

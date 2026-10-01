@@ -10,6 +10,6 @@
     ]
   },
   "objections": [
-    { "id": "o1", "text": "The accounts were written decades later.", "response": "Placeholder response text." }
+    { "id": "o1", "text": "The accounts were written decades later.", "response": "Placeholder response text.", "relatesTo": "p2" }
   ]
 }

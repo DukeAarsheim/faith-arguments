@@ -10,6 +10,6 @@
     ]
   },
   "objections": [
-    { "id": "o1", "text": "Hasn't evolution disproven the biblical account of human origins?", "response": "Placeholder response text." }
+    { "id": "o1", "text": "Hasn't evolution disproven the biblical account of human origins?", "response": "Placeholder response text.", "relatesTo": "p2" }
   ]
 }

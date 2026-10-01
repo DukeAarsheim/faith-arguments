@@ -10,6 +10,6 @@
     ]
   },
   "objections": [
-    { "id": "o1", "text": "Isn't the New Testament itself unreliable, since it was written after the events it describes?", "response": "Placeholder response text." }
+    { "id": "o1", "text": "Isn't the New Testament itself unreliable, since it was written after the events it describes?", "response": "Placeholder response text.", "relatesTo": "p1" }
   ]
 }

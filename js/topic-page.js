@@ -48,15 +48,12 @@
       '<p class="eyebrow">Topic</p>' +
       '<h1></h1>' +
       '<p class="summary"></p>' +
-      '<div id="argument-root"></div>' +
-      '<p class="section-label">Objections and responses</p>' +
-      '<div id="objections-root"></div>';
+      '<div id="argument-root"></div>';
 
     rootEl.querySelector('h1').textContent = topic.title;
     rootEl.querySelector('.summary').textContent = topic.summary;
 
-    FaithApp.renderArgumentTree(topic.argument, document.getElementById('argument-root'));
-    FaithApp.renderObjections(topic.objections, document.getElementById('objections-root'));
+    FaithApp.renderArgumentTree(topic.argument, topic.objections, document.getElementById('argument-root'));
   }
 
   init();

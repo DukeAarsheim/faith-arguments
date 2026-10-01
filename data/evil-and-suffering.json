@@ -10,6 +10,6 @@
     ]
   },
   "objections": [
-    { "id": "o1", "text": "Couldn't an all-powerful God have created a world with free will but without so much unnecessary suffering?", "response": "Placeholder response text." }
+    { "id": "o1", "text": "Couldn't an all-powerful God have created a world with free will but without so much unnecessary suffering?", "response": "Placeholder response text.", "relatesTo": "p2" }
   ]
 }

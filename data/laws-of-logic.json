@@ -10,6 +10,6 @@
     ]
   },
   "objections": [
-    { "id": "o1", "text": "Couldn't the laws of logic just be useful conventions humans invented?", "response": "Placeholder response text." }
+    { "id": "o1", "text": "Couldn't the laws of logic just be useful conventions humans invented?", "response": "Placeholder response text.", "relatesTo": "p1" }
   ]
 }

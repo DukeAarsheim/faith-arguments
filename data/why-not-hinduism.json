@@ -10,6 +10,6 @@
     ]
   },
   "objections": [
-    { "id": "o1", "text": "Isn't it arrogant to say one religious tradition is simply correct and others aren't?", "response": "Placeholder response text." }
+    { "id": "o1", "text": "Isn't it arrogant to say one religious tradition is simply correct and others aren't?", "response": "Placeholder response text.", "relatesTo": "p2" }
   ]
 }

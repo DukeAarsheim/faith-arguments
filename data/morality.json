@@ -17,6 +17,6 @@
     ]
   },
   "objections": [
-    { "id": "o1", "text": "Morality could be a product of evolution alone.", "response": "Placeholder response text." }
+    { "id": "o1", "text": "Morality could be a product of evolution alone.", "response": "Placeholder response text.", "relatesTo": "p2" }
   ]
 }

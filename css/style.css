@@ -57,7 +57,6 @@ main { max-width: 900px; margin: 0 auto; padding: 24px; }
 h1 { margin: 0 0 8px; font-size: 22px; font-weight: 600; }
 .eyebrow { font-size: 12px; color: var(--text-muted); margin: 0 0 4px; }
 .summary { color: var(--text-secondary); line-height: 1.7; margin: 0 0 24px; }
-.section-label { font-weight: 500; font-size: 15px; margin: 24px 0 8px; }
 
 .kebab-btn {
   background: transparent;
@@ -183,30 +182,33 @@ h1 { margin: 0 0 8px; font-size: 22px; font-weight: 600; }
   justify-items: center;
 }
 
-.argument-conclusion { background: var(--surface-1); border-radius: var(--radius); padding: 12px 16px; margin-bottom: 16px; }
+.argument-conclusion { background: var(--surface-1); border-radius: var(--radius); padding: 12px 16px; margin-bottom: 32px; }
 .argument-conclusion .label { font-size: 12px; color: var(--text-secondary); margin: 0 0 2px; }
 .argument-conclusion .value { font-weight: 500; font-size: 15px; margin: 0; }
 
-.premise, .objection { border: 0.5px solid var(--border); border-radius: var(--radius); margin-bottom: 8px; overflow: hidden; }
-.premise-head, .objection-head {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 12px 16px;
-  background: transparent;
-  border: none;
-  color: var(--text-primary);
-  text-align: left;
-  font-size: 14px;
-  cursor: pointer;
+.article-row { margin-bottom: 36px; }
+.article-row.has-objection {
+  display: grid;
+  grid-template-columns: 1fr 280px;
+  gap: 28px;
+  align-items: start;
 }
-.premise-head { font-weight: 500; }
-.chevron { flex-shrink: 0; transition: transform 0.15s ease; font-size: 12px; color: var(--text-secondary); }
-.premise[data-open="true"] > .premise-head .chevron, .objection[data-open="true"] .chevron { transform: rotate(180deg); }
-.premise-body, .objection-body { display: none; padding: 0 16px 14px; font-size: 14px; color: var(--text-secondary); line-height: 1.7; }
-.premise[data-open="true"] > .premise-body, .objection[data-open="true"] .objection-body { display: block; }
-.premise-children { margin-top: 10px; padding-left: 16px; border-left: 0.5px solid var(--border); }
+.article-main { min-width: 0; }
+
+.premise-heading { font-size: 19px; font-weight: 500; margin: 0 0 10px; }
+.premise-subheading { font-size: 16px; font-weight: 500; margin: 20px 0 8px; }
+.premise-text { color: var(--text-secondary); line-height: 1.75; margin: 0; }
+.premise-children { margin-top: 4px; padding-left: 20px; border-left: 0.5px solid var(--border); }
+
+.article-objections { display: flex; flex-direction: column; gap: 16px; }
+.objection-card { border: 0.5px solid var(--border); border-radius: var(--radius); padding: 14px 16px; background: var(--surface-1); }
+.objection-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.04em; color: var(--text-muted); margin: 0 0 6px; }
+.objection-text { font-weight: 500; font-size: 14px; margin: 0 0 8px; line-height: 1.5; }
+.objection-response { font-size: 13px; color: var(--text-secondary); line-height: 1.7; margin: 0; }
+
+@media (max-width: 760px) {
+  .article-row.has-objection { grid-template-columns: 1fr; gap: 16px; }
+}
 
 .not-found { text-align: center; padding: 60px 0; color: var(--text-secondary); }
 

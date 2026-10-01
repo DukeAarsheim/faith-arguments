@@ -54,7 +54,8 @@
     {
       "id": "o1",
       "text": "An undetermined choice looks less like control and more like luck — if nothing prior fixes which way you choose, isn't the outcome just random?",
-      "response": "This is the sharpest version of the worry, and it's part of why substance dualism is the more promising candidate among the options: a non-physical will is not proposed as a random physical event but as a distinct kind of originating cause, not bound by the physical chain of prior causes the way a probabilistic brain event would be. The remaining question is whether such a non-physical cause can interact with a physical brain without violating what we know about physics — which is exactly what the causal-closure argument goes on to test."
+      "response": "This is the sharpest version of the worry, and it's part of why substance dualism is the more promising candidate among the options: a non-physical will is not proposed as a random physical event but as a distinct kind of originating cause, not bound by the physical chain of prior causes the way a probabilistic brain event would be. The remaining question is whether such a non-physical cause can interact with a physical brain without violating what we know about physics — which is exactly what the causal-closure argument goes on to test.",
+      "relatesTo": "p2"
     }
   ]
 }

@@ -1,49 +1,38 @@
 window.FaithApp = window.FaithApp || {};
 
 (function (FaithApp) {
-  function renderPremise(premise, parentEl) {
-    const row = document.createElement('div');
-    row.className = 'premise';
-    row.setAttribute('data-open', 'false');
+  function renderPremiseContent(premise, parentEl, level) {
+    const heading = document.createElement(level === 0 ? 'h2' : 'h3');
+    heading.className = level === 0 ? 'premise-heading' : 'premise-subheading';
+    heading.textContent = premise.text;
+    parentEl.appendChild(heading);
 
-    const head = document.createElement('button');
-    head.className = 'premise-head';
-    head.type = 'button';
-    head.setAttribute('aria-expanded', 'false');
-
-    const textSpan = document.createElement('span');
-    textSpan.textContent = premise.text;
-    const chevron = document.createElement('span');
-    chevron.className = 'chevron';
-    chevron.textContent = '▾';
-    head.appendChild(textSpan);
-    head.appendChild(chevron);
-
-    const body = document.createElement('div');
-    body.className = 'premise-body';
-    body.textContent = premise.support || '';
+    const paragraph = document.createElement('p');
+    paragraph.className = 'premise-text';
+    paragraph.textContent = premise.support || '';
+    parentEl.appendChild(paragraph);
 
     if (premise.children && premise.children.length > 0) {
       const childrenWrap = document.createElement('div');
       childrenWrap.className = 'premise-children';
       premise.children.forEach(function (child) {
-        renderPremise(child, childrenWrap);
+        renderPremiseContent(child, childrenWrap, level + 1);
       });
-      body.appendChild(childrenWrap);
+      parentEl.appendChild(childrenWrap);
     }
-
-    head.addEventListener('click', function () {
-      const isOpen = row.getAttribute('data-open') === 'true';
-      row.setAttribute('data-open', isOpen ? 'false' : 'true');
-      head.setAttribute('aria-expanded', isOpen ? 'false' : 'true');
-    });
-
-    row.appendChild(head);
-    row.appendChild(body);
-    parentEl.appendChild(row);
   }
 
-  FaithApp.renderArgumentTree = function (argument, containerEl) {
+  function groupObjectionsByPremise(objections) {
+    const map = {};
+    (objections || []).forEach(function (objection) {
+      const key = objection.relatesTo || '';
+      if (!map[key]) map[key] = [];
+      map[key].push(objection);
+    });
+    return map;
+  }
+
+  FaithApp.renderArgumentTree = function (argument, objections, containerEl) {
     containerEl.innerHTML = '';
 
     const conclusion = document.createElement('div');
@@ -58,8 +47,29 @@ window.FaithApp = window.FaithApp || {};
     conclusion.appendChild(value);
     containerEl.appendChild(conclusion);
 
+    const objectionsByPremise = groupObjectionsByPremise(objections);
+
     argument.premises.forEach(function (premise) {
-      renderPremise(premise, containerEl);
+      const related = objectionsByPremise[premise.id] || [];
+
+      const row = document.createElement('div');
+      row.className = 'article-row' + (related.length > 0 ? ' has-objection' : '');
+
+      const main = document.createElement('div');
+      main.className = 'article-main';
+      renderPremiseContent(premise, main, 0);
+      row.appendChild(main);
+
+      if (related.length > 0) {
+        const aside = document.createElement('aside');
+        aside.className = 'article-objections';
+        related.forEach(function (objection) {
+          aside.appendChild(FaithApp.buildObjectionCard(objection));
+        });
+        row.appendChild(aside);
+      }
+
+      containerEl.appendChild(row);
     });
   };
 })(window.FaithApp);
