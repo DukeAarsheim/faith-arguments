@@ -118,15 +118,17 @@ h1 { margin: 0 0 16px; font-size: clamp(32px, 5vw, 48px); line-height: 1.15; let
 }
 .hero-dim { color: rgba(255, 255, 255, 0.42); }
 
+main.wide { max-width: 2000px; padding: 24px clamp(12px, 2vw, 32px) 40px; }
+
 .topic-group {
   border: 0.5px solid var(--border);
   border-radius: 28px;
-  padding: 28px 28px 32px;
-  margin: 24px 0 32px;
+  padding: 22px 22px 26px;
+  margin: 0 0 24px;
   background: rgba(255, 255, 255, 0.02);
 }
 .topic-group-title {
-  margin: 0 0 28px;
+  margin: 0 0 22px;
   font-family: var(--font-body);
   font-size: 11px;
   font-weight: 500;
@@ -135,15 +137,15 @@ h1 { margin: 0 0 16px; font-size: clamp(32px, 5vw, 48px); line-height: 1.15; let
   color: var(--text-secondary);
   text-align: center;
 }
-.topic-group-tiles { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; }
+.topic-group-tiles { display: grid; grid-template-columns: repeat(var(--cols, 4), minmax(0, 1fr)); gap: 16px; }
 
-.topic-tile { display: block; flex: 1 1 120px; max-width: 156px; text-align: center; cursor: pointer; }
+.topic-tile { display: block; container-type: inline-size; text-align: center; cursor: pointer; }
 .tile-surface {
   position: relative;
   overflow: hidden;
   width: 100%;
   aspect-ratio: 1 / 1;
-  border-radius: 22px;
+  border-radius: clamp(20px, 8cqw, 40px);
   border: 1px solid var(--border);
   background-color: rgba(10, 10, 10, 0.55);
   display: flex;
@@ -151,13 +153,22 @@ h1 { margin: 0 0 16px; font-size: clamp(32px, 5vw, 48px); line-height: 1.15; let
   justify-content: center;
   transition: transform 0.18s ease, border-color 0.18s ease, background 0.18s ease;
 }
+.topic-tile:hover,
+.topic-tile:focus-visible { position: relative; z-index: 2; }
 .topic-tile:hover .tile-surface,
 .topic-tile:focus-visible .tile-surface {
-  transform: scale(1.1);
+  transform: scale(1.08);
   border-color: var(--border-strong);
   background: var(--surface-1-hover);
 }
-.tile-label { position: relative; z-index: 1; font-family: var(--font-display); font-size: 15px; line-height: 1.3; padding: 0 12px; }
+.tile-label {
+  position: relative;
+  z-index: 1;
+  font-family: var(--font-display);
+  font-size: clamp(14px, 6.4cqw, 28px);
+  line-height: 1.3;
+  padding: 0 7cqw;
+}
 .topic-tile.is-blank { cursor: default; }
 .topic-tile.is-blank .tile-surface { pointer-events: none; border-style: dashed; }
 
@@ -169,8 +180,8 @@ h1 { margin: 0 0 16px; font-size: clamp(32px, 5vw, 48px); line-height: 1.15; let
 }
 
 @media (max-width: 640px) {
-  .topic-group { padding: 22px 16px 24px; border-radius: 24px; }
-  .topic-tile { flex: 0 0 calc(50% - 10px); max-width: none; }
+  .topic-group { padding: 18px 14px 20px; border-radius: 24px; }
+  .topic-group-tiles { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
 }
 
 .argument-conclusion {

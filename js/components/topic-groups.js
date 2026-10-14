@@ -55,8 +55,8 @@ window.FaithApp = window.FaithApp || {};
     span.className = className;
     span.style.top = spec.top;
     span.style.left = spec.left;
-    span.style.width = spec.size + 'px';
-    span.style.height = spec.size + 'px';
+    span.style.width = spec.size / 1.5 + 'cqw';
+    span.style.height = spec.size / 1.5 + 'cqw';
     span.style.opacity = spec.opacity;
     span.setAttribute('aria-hidden', 'true');
     return span;
@@ -128,6 +128,7 @@ window.FaithApp = window.FaithApp || {};
         patternIndex += 1;
       }
 
+      tiles.style.setProperty('--cols', String(groupTopics.length + blanks));
       box.appendChild(tiles);
       containerEl.appendChild(box);
     });
