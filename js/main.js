@@ -2,8 +2,7 @@ window.FaithApp = window.FaithApp || {};
 
 (function (FaithApp) {
   FaithApp.STORAGE_KEYS = {
-    VISITED: 'faithArguments.visitedTopics',
-    LAYOUT: 'faithArguments.homeLayout'
+    VISITED: 'faithArguments.visitedTopics'
   };
 
   FaithApp.loadTopics = async function () {
@@ -33,23 +32,6 @@ window.FaithApp = window.FaithApp || {};
       }
     } catch (err) {
       // localStorage unavailable; visited tracking silently degrades
-    }
-  };
-
-  FaithApp.getLayoutPreference = function () {
-    try {
-      const value = localStorage.getItem(FaithApp.STORAGE_KEYS.LAYOUT);
-      return value === 'grid' ? 'grid' : 'web';
-    } catch (err) {
-      return 'web';
-    }
-  };
-
-  FaithApp.setLayoutPreference = function (mode) {
-    try {
-      localStorage.setItem(FaithApp.STORAGE_KEYS.LAYOUT, mode);
-    } catch (err) {
-      // localStorage unavailable; layout choice won't persist
     }
   };
 
