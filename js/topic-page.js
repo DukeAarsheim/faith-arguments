@@ -30,11 +30,17 @@
       return;
     }
 
+    const isMarkdown = topicMeta.format === 'markdown';
     let topic;
+    let markdown;
     try {
-      const response = await fetch('data/' + slug + '.json');
+      const response = await fetch('data/' + slug + (isMarkdown ? '.md' : '.json'));
       if (!response.ok) throw new Error('Not found');
-      topic = await response.json();
+      if (isMarkdown) {
+        markdown = await response.text();
+      } else {
+        topic = await response.json();
+      }
     } catch (err) {
       FaithApp.renderNav(topics, null, navEl);
       renderNotFound(rootEl);
@@ -43,6 +49,16 @@
 
     FaithApp.markVisited(slug);
     FaithApp.renderNav(topics, slug, navEl);
+
+    if (isMarkdown) {
+      rootEl.innerHTML =
+        '<p class="eyebrow">Topic</p>' +
+        '<h1></h1>' +
+        '<div id="markdown-root"></div>';
+      const result = FaithApp.renderMarkdownTopic(markdown, document.getElementById('markdown-root'));
+      rootEl.querySelector('h1').textContent = result.title || topicMeta.title;
+      return;
+    }
 
     rootEl.innerHTML =
       '<p class="eyebrow">Topic</p>' +

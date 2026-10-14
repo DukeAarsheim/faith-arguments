@@ -3,7 +3,7 @@
   { "slug": "morality", "title": "Morality", "teaser": "Where objective moral obligations could come from.", "group": 1 },
   { "slug": "free-will", "title": "Free Will", "teaser": "Why free will fits better with theism than naturalism.", "group": 1 },
   { "slug": "laws-of-logic", "title": "The Laws of Logic", "teaser": "Why universal, non-physical laws of thought point to a mind.", "group": 1 },
-  { "slug": "jesus", "title": "Jesus", "teaser": "The historical case for the resurrection.", "group": 2 },
+  { "slug": "jesus", "title": "Jesus", "teaser": "The historical case for the resurrection.", "group": 2, "format": "markdown" },
   { "slug": "old-testament", "title": "The Old Testament", "teaser": "Its reliability and how it points forward to Jesus.", "group": 2 },
   { "slug": "new-testament", "title": "The New Testament", "teaser": "Why the New Testament documents can be trusted.", "group": 2 },
   { "slug": "why-not-islam", "title": "Why Not Islam?", "teaser": "Comparing the historical case for Christianity and Islam.", "group": 2 },
