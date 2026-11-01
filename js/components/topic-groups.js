@@ -1,11 +1,7 @@
 window.FaithApp = window.FaithApp || {};
 
 (function (FaithApp) {
-  const GROUPS = [
-    { id: 1, title: 'Does God Exist?' },
-    { id: 2, title: 'Why Christianity?' },
-    { id: 3, title: 'Common Objections' }
-  ];
+  const GROUPS = FaithApp.GROUPS;
   const BLANK_SLOTS = { 3: 2 };
 
   const STAR_PATTERNS = [
