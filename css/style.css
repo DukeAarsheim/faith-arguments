@@ -139,7 +139,7 @@ h1 { margin: 0 0 16px; font-size: clamp(32px, 5vw, 48px); line-height: 1.15; let
 
 main.wide { max-width: 1360px; padding: 0 clamp(20px, 4vw, 56px) 64px; }
 
-.hero { padding: clamp(56px, 11vh, 130px) 0 clamp(48px, 9vh, 110px); }
+.hero { padding: clamp(56px, 11vh, 130px) 0 clamp(96px, 18vh, 210px); }
 .hero-title {
   margin: 0;
   font-family: var(--font-body);
@@ -178,6 +178,7 @@ main.wide { max-width: 1360px; padding: 0 clamp(20px, 4vw, 56px) 64px; }
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
+  width: 100%;
   aspect-ratio: 16 / 10;
   min-height: 190px;
   padding: 22px 24px;
