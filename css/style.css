@@ -178,7 +178,6 @@ main.wide { max-width: 1360px; padding: 0 clamp(20px, 4vw, 56px) 64px; }
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  container-type: inline-size;
   aspect-ratio: 16 / 10;
   min-height: 190px;
   padding: 22px 24px;
@@ -195,7 +194,6 @@ main.wide { max-width: 1360px; padding: 0 clamp(20px, 4vw, 56px) 64px; }
   background-color: rgba(255, 255, 255, 0.07);
   outline: none;
 }
-.card-art { position: absolute; top: 0; left: 0; right: 0; height: 56%; pointer-events: none; }
 .card-arrow {
   position: absolute;
   top: 18px;
@@ -213,13 +211,6 @@ main.wide { max-width: 1360px; padding: 0 clamp(20px, 4vw, 56px) 64px; }
 .card-teaser { margin: 8px 0 0; min-height: 3.1em; font-size: 13.5px; line-height: 1.55; color: var(--text-secondary); }
 .topic-card.is-blank { cursor: default; border-style: dashed; background-color: transparent; }
 .topic-card.is-blank:hover { transform: none; border-color: var(--border); background-color: transparent; }
-
-.star-dot { position: absolute; border-radius: 50%; background: #ffffff; }
-.star-sparkle {
-  position: absolute;
-  background: #ffffff;
-  clip-path: polygon(50% 0%, 61% 35%, 100% 50%, 61% 65%, 50% 100%, 39% 65%, 0% 50%, 39% 35%);
-}
 
 @media (max-width: 900px) {
   .topic-cards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
