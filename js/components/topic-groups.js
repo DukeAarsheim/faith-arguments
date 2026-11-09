@@ -51,48 +51,56 @@ window.FaithApp = window.FaithApp || {};
     span.className = className;
     span.style.top = spec.top;
     span.style.left = spec.left;
-    span.style.width = spec.size / 1.5 + 'cqw';
-    span.style.height = spec.size / 1.5 + 'cqw';
+    span.style.width = spec.size * 0.4 + 'cqw';
+    span.style.height = spec.size * 0.4 + 'cqw';
     span.style.opacity = spec.opacity;
-    span.setAttribute('aria-hidden', 'true');
     return span;
   }
 
-  function buildStarfield(pattern) {
-    const frag = document.createDocumentFragment();
-    pattern.dots.forEach(function (dot) { frag.appendChild(buildStar('star-dot', dot)); });
-    pattern.sparkles.forEach(function (sparkle) { frag.appendChild(buildStar('star-sparkle', sparkle)); });
-    return frag;
+  function buildArt(patternIndex) {
+    const pattern = STAR_PATTERNS[patternIndex % STAR_PATTERNS.length];
+    const art = document.createElement('div');
+    art.className = 'card-art';
+    art.setAttribute('aria-hidden', 'true');
+    pattern.dots.forEach(function (dot) { art.appendChild(buildStar('star-dot', dot)); });
+    pattern.sparkles.forEach(function (sparkle) { art.appendChild(buildStar('star-sparkle', sparkle)); });
+    return art;
   }
 
-  function buildSurface(patternIndex) {
-    const surface = document.createElement('div');
-    surface.className = 'tile-surface';
-    surface.appendChild(buildStarfield(STAR_PATTERNS[patternIndex % STAR_PATTERNS.length]));
-    return surface;
+  function buildCard(topic, patternIndex) {
+    const card = document.createElement('a');
+    card.className = 'topic-card';
+    card.href = 'topic.html?topic=' + encodeURIComponent(topic.slug);
+    card.appendChild(buildArt(patternIndex));
+
+    const arrow = document.createElement('span');
+    arrow.className = 'card-arrow';
+    arrow.setAttribute('aria-hidden', 'true');
+    arrow.textContent = '→';
+    card.appendChild(arrow);
+
+    const text = document.createElement('div');
+    text.className = 'card-text';
+    const title = document.createElement('h3');
+    title.className = 'card-title';
+    title.textContent = topic.title;
+    text.appendChild(title);
+    if (topic.teaser) {
+      const teaser = document.createElement('p');
+      teaser.className = 'card-teaser';
+      teaser.textContent = topic.teaser;
+      text.appendChild(teaser);
+    }
+    card.appendChild(text);
+    return card;
   }
 
-  function buildTile(topic, patternIndex) {
-    const tile = document.createElement('a');
-    tile.className = 'topic-tile';
-    tile.href = 'topic.html?topic=' + encodeURIComponent(topic.slug);
-
-    const surface = buildSurface(patternIndex);
-    const label = document.createElement('span');
-    label.className = 'tile-label';
-    label.textContent = topic.title;
-    surface.appendChild(label);
-
-    tile.appendChild(surface);
-    return tile;
-  }
-
-  function buildBlankTile(patternIndex) {
-    const tile = document.createElement('div');
-    tile.className = 'topic-tile is-blank';
-    tile.setAttribute('aria-hidden', 'true');
-    tile.appendChild(buildSurface(patternIndex));
-    return tile;
+  function buildBlankCard(patternIndex) {
+    const card = document.createElement('div');
+    card.className = 'topic-card is-blank';
+    card.setAttribute('aria-hidden', 'true');
+    card.appendChild(buildArt(patternIndex));
+    return card;
   }
 
   FaithApp.renderTopicGroups = function (topics, containerEl) {
@@ -104,29 +112,27 @@ window.FaithApp = window.FaithApp || {};
       const blanks = BLANK_SLOTS[group.id] || 0;
       if (groupTopics.length === 0 && blanks === 0) return;
 
-      const box = document.createElement('section');
-      box.className = 'topic-group';
+      const section = document.createElement('section');
+      section.className = 'topic-section';
 
       const title = document.createElement('h2');
-      title.className = 'topic-group-title';
+      title.className = 'topic-section-title';
       title.textContent = group.title;
-      box.appendChild(title);
+      section.appendChild(title);
 
-      const tiles = document.createElement('div');
-      tiles.className = 'topic-group-tiles';
-
+      const cards = document.createElement('div');
+      cards.className = 'topic-cards';
       groupTopics.forEach(function (topic) {
-        tiles.appendChild(buildTile(topic, patternIndex));
+        cards.appendChild(buildCard(topic, patternIndex));
         patternIndex += 1;
       });
       for (let b = 0; b < blanks; b++) {
-        tiles.appendChild(buildBlankTile(patternIndex));
+        cards.appendChild(buildBlankCard(patternIndex));
         patternIndex += 1;
       }
 
-      tiles.style.setProperty('--cols', String(groupTopics.length + blanks));
-      box.appendChild(tiles);
-      containerEl.appendChild(box);
+      section.appendChild(cards);
+      containerEl.appendChild(section);
     });
   };
 })(window.FaithApp);
