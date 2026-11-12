@@ -8,7 +8,8 @@ window.FaithApp = window.FaithApp || {};
   FaithApp.GROUPS = [
     { id: 1, title: 'Does God Exist?' },
     { id: 2, title: 'Why Christianity?' },
-    { id: 3, title: 'Common Objections' }
+    { id: 3, title: 'Common Objections' },
+    { id: 4, title: 'Free Will' }
   ];
 
   FaithApp.loadTopics = async function () {

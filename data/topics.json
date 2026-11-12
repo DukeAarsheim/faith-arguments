@@ -1,7 +1,7 @@
 [
   { "slug": "universe", "title": "The Beginning of the Universe", "teaser": "Why the universe having a beginning points to a cause.", "group": 1 },
   { "slug": "morality", "title": "Morality", "teaser": "Where objective moral obligations could come from.", "group": 1 },
-  { "slug": "free-will", "title": "Free Will", "teaser": "Why free will fits better with theism than naturalism.", "group": 1 },
+  { "slug": "free-will", "title": "Free Will", "teaser": "Why free will fits better with theism than naturalism.", "group": 4 },
   { "slug": "laws-of-logic", "title": "The Laws of Logic", "teaser": "Why universal, non-physical laws of thought point to a mind.", "group": 1 },
   { "slug": "jesus", "title": "Jesus", "teaser": "The historical case for the resurrection.", "group": 2, "format": "markdown" },
   { "slug": "old-testament", "title": "The Old Testament", "teaser": "Its reliability and how it points forward to Jesus.", "group": 2 },
